@@ -1,7 +1,7 @@
 <template>
 
     <!-- Card -->
-    <div class="card">
+    <div class="card w-100">
         <!-- Card image -->
         <div class="view overlay">
             <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
@@ -17,7 +17,7 @@
             <!-- Title -->
             <h4 class="card-title">{{ itemTitle }}</h4>
             <!-- Text -->
-            <p class="card-text"> {{ itemContent }}</p>
+            <p class="card-text"> {{ itemDescription }}</p>
 
             <p>{{ price }}</p>
             <!-- Button -->
@@ -33,6 +33,6 @@
 
 <script>
     export default {
-        props: {"itemTitle": String, "itemContent" : String, "price" : Number},
+        props: {"itemTitle": String, "itemDescription" : String, "price" : Number},
     }
 </script>
