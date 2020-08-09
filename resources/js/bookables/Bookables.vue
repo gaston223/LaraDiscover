@@ -1,17 +1,16 @@
 <template>
     <div>
         <div v-if="loading">
-            data is loading...
+            Chargement...
         </div>
 
         <div v-else>
             <div class="row mb-4" v-for="row in rows" :key=" 'row' + row">
-                <div class="col d-flex align-items-stretch" v-for="(bookable, column) in bookablesInRow(row)"
+                <div class="col-md-4 d-flex align-items-stretch" v-for="(bookable, column) in bookablesInRow(row)"
                      :key="'row'+ row + column">
                     <bookable-list-item
-                        :item-title="bookable.title"
-                        :item-description="bookable.description"
-                        :price="1000">
+                        v-bind="bookable"
+                    >
                     </bookable-list-item>
                 </div>
                 <div class="col" v-for="p in placeholdersInRow(row)" :key="'placeholder' + row + p">
@@ -53,7 +52,7 @@
         },
         created() {
             this.loading = true
-
+/*
             const p = new Promise((resolve, reject ) => {
                 console.log(resolve);
                 console.log(reject);
@@ -63,7 +62,7 @@
                 .then(result =>console.log(result))
                 .catch(result => console.log(`Error ${result}`));
 
-                console.log(p);
+                console.log(p);*/
 
             const request = axios
                 .get('/api/bookables')
@@ -71,8 +70,6 @@
                     this.bookables = response.data;
                     this.loading = false;
                 });
-
-
         }
     };
 </script>

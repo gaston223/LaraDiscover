@@ -14,12 +14,14 @@
         <!-- Card content -->
         <div class="card-body">
 
-            <!-- Title -->
-            <h4 class="card-title">{{ itemTitle }}</h4>
-            <!-- Text -->
-            <p class="card-text"> {{ itemDescription }}</p>
+            <router-link :to="{ name: 'bookable', params: { id : id} }">
+                <!-- Title -->
+                <h4 class="card-title">{{ title }}</h4>
+            </router-link>
 
-            <p>{{ price }}</p>
+            <!-- Text -->
+            <p class="card-text"> {{ description }}</p>
+
             <!-- Button -->
             <a href="#" class="btn btn-primary">Button</a>
 
@@ -33,6 +35,6 @@
 
 <script>
     export default {
-        props: {"itemTitle": String, "itemDescription" : String, "price" : Number},
+        props: {"title": String, "description" : String, "id" : Number},
     }
 </script>
