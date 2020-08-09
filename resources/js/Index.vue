@@ -14,7 +14,7 @@
                         <router-link :to="{name : 'home'}" class="nav-link">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{name: 'second'}" class="nav-link">Second</router-link>
+                        <a class="nav-link" href="#">Second</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>
