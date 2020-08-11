@@ -1,10 +1,12 @@
 <template>
+
     <div>
         <div v-if="loading">
             Chargement...
         </div>
 
         <div v-else>
+            <h2>Nos Expériences : </h2>
             <div class="row mb-4" v-for="row in rows" :key=" 'row' + row">
                 <div class="col-md-4 d-flex align-items-stretch" v-for="(bookable, column) in bookablesInRow(row)"
                      :key="'row'+ row + column">

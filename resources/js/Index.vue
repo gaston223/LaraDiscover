@@ -1,71 +1,100 @@
 <template>
     <div>
 
+        <body class="hostel-lp">
+
+        <header>
         <!--Navbar -->
-        <nav class="mb-1 navbar navbar-expand-lg navbar-dark default-color">
-            <router-link :to="{name: 'home'}" class="navbar-brand" href="#">Discover</router-link>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-                    aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <router-link :to="{name : 'home'}" class="nav-link">Home</router-link>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Second</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">Dropdown
-                        </a>
-                        <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ml-auto nav-flex-icons">
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link waves-effect waves-light">
-                            <i class="fab fa-google-plus-g"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-334" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            Bonjour Gaoussou
-                            <i class="fas fa-user"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-default"
-                             aria-labelledby="navbarDropdownMenuLink-334">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+            <nav class="mb-1 navbar navbar-expand-lg navbar-dark light-blue lighten-1  fixed-top scrolling-navbar">
+                <div class="container">
+                    <router-link :to="{name: 'home'}" class="navbar-brand logo" href="#"><i class="fas fa-camera-retro"></i> DISCOVER</router-link>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+                            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <router-link :to="{name : 'home'}" class="nav-link">Home</router-link>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Second</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Pricing</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">Dropdown
+                                </a>
+                                <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto nav-flex-icons">
+                            <li class="nav-item">
+                                <a class="nav-link waves-effect waves-light">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link waves-effect waves-light">
+                                    <i class="fab fa-google-plus-g"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-334" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    Bonjour Gaoussou
+                                    <i class="fas fa-user"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                                     aria-labelledby="navbarDropdownMenuLink-334">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+        </header>
         <!--/.Navbar -->
         <!--<router-link to="/">Home</router-link>
         <router-link to="/second">Second</router-link>-->
-        <div class="container mt-4 mb-4 pr-4 pl-4">
-            <router-view></router-view>
+
+        <!-- Jumbotron -->
+        <div class="card card-image pt-5" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img (29).jpg');">
+            <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+                <div class="py-5">
+
+                    <!-- Content -->
+
+                    <h2 class="card-title h2 my-4 py-2">Profitez des meilleurs expériences !</h2>
+                    <p class="mb-4 pb-2 px-md-5 mx-md-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur obcaecati vero aliquid libero doloribus ad, unde tempora maiores, ullam, modi qui quidem minima debitis perferendis vitae cumque et quo impedit.</p>
+                    <a class="btn btn-rounded aqua-gradient"><i class="fas fa-clone left"></i> RESERVATION</a>
+
+                </div>
+            </div>
+        </div>
+        <!-- Jumbotron -->
+
+
+        <div class="container mt-4 mb-4 pr-4 pl-4 ">
+            <router-view class="pt-5"></router-view>
         </div>
 
+
+        </body>
     </div>
 </template>
+
 
 <style>
     body{
@@ -73,5 +102,8 @@
     }
     h1,h2,h3,h4,h5,h6,p{
         font-weight: normal;
+    }
+   .logo{
+        font-weight: bold;
     }
 </style>

@@ -13,5 +13,5 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js').sourceMaps()
     .js('public/mdb/js/jquery.min.js', 'public/js')
-    .js('public/mdb/js/mdb.min.js', 'public/js')
+    //.js('public/mdb/js/mdb.min.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');

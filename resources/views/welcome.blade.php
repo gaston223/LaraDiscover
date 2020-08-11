@@ -27,7 +27,7 @@
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src=" {{asset('./mdb/js/bootstrap.min.js')}}"></script>--}}
     <!-- MDB core JavaScript -->
-   {{-- <script type="text/javascript" src=" {{asset('./mdb/js/mdb.min.js')}}" defer></script>--}}
+    <script type="text/javascript" src=" {{asset('./mdb/js/mdb.min.js')}}" defer></script>
     <script type="text/javascript" src=" {{asset('./mdb/js/addons/datatables.min.js')}}" defer></script>
 </html>
 
