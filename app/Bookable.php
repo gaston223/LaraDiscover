@@ -12,6 +12,11 @@ class Bookable extends Model
         return $this->hasMany(Booking::class);
     }
 
+    public function review()
+    {
+        return $this->hasMany(Review::class);
+    }
+
     /**
      * Fonction qui retourne un booleen si le bookable est disponible ou pas
      * @param $from

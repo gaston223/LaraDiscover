@@ -13,6 +13,7 @@
                    <div v-else>Chargement ...</div>
 
                </div>
+                <review-list></review-list>
             </div>
             <div class="col-md-4 pb-4">
                 <disponibilite></disponibilite>
@@ -24,9 +25,11 @@
 
 <script>
     import Disponibilite from "./Availability";
+    import ReviewList from "./ReviewList";
     export default {
         components: {
-            Disponibilite
+            Disponibilite,
+            ReviewList
         },
         data(){
             return {
