@@ -13,10 +13,10 @@
                    <div v-else>Chargement ...</div>
 
                </div>
-                <review-list></review-list>
+                <review-list :bookable-id="this.$route.params.id"></review-list>
             </div>
             <div class="col-md-4 pb-4">
-                <disponibilite></disponibilite>
+                <disponibilite :bookable-id="this.$route.params.id"></disponibilite>
             </div>
         </div>
 

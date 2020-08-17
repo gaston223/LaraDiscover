@@ -27,6 +27,7 @@
         "@fortawesome/fontawesome-free": "^5.14.0",
         "font-awesome": "^4.7.0",
         "mdbvue": "^6.7.1",
+        "moment": "^2.27.0",
         "vue-router": "^3.3.4"
     }
 }
