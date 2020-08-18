@@ -4,6 +4,7 @@ import router from "./routes";
 import VueRouter from "vue-router";
 import Index from "./Index";
 import moment from "moment";
+import StarRating from "./shared/components/StarRating";
 //require('bootstrap/dist/css/bootstrap.min.css');
 //require('mdbvue/lib/css/mdb.min.css');
 
@@ -14,8 +15,12 @@ Vue.component('example-component2', require('./components/ExampleComponent2.vue'
 
 Vue.use(VueRouter);
 
+//Moment.js
 Vue.filter("fromNow", value => moment(value).fromNow());
 moment.locale('fr');
+
+Vue.component("star-rating", StarRating);
+
 const app = new Vue({
     el: '#app',
     router,

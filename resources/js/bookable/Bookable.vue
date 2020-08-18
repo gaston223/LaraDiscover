@@ -16,7 +16,7 @@
                 <review-list :bookable-id="this.$route.params.id"></review-list>
             </div>
             <div class="col-md-4 pb-4">
-                <disponibilite :bookable-id="this.$route.params.id"></disponibilite>
+                <availability :bookable-id="this.$route.params.id"></availability>
             </div>
         </div>
 
@@ -24,11 +24,11 @@
 </template>
 
 <script>
-    import Disponibilite from "./Availability";
+    import Availability from "./Availability";
     import ReviewList from "./ReviewList";
     export default {
         components: {
-            Disponibilite,
+            Availability,
             ReviewList
         },
         data(){

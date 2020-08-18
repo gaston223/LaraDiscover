@@ -36,15 +36,8 @@
                     </div>
 
                     <div class="col-md-6 d-flex justify-content-end">
-                        <strong>Note : {{review.rating}} </strong>
 
-                        <span class="rating">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </span>
+                        <star-rating :rating="review.rating" class="fa-lg rating"></star-rating>
                     </div>
                 </div>
 
@@ -74,7 +67,7 @@
             return {
                 loading :false,
                 reviews: null
-            }
+            };
         },
 
         created() {
@@ -82,6 +75,7 @@
             axios.get(`/api/bookables/${this.bookableId}/reviews`)
                 .then(response => this.reviews = response.data.data)
                 .then(()=>(this.loading = false));
+
         },
        /* filters: {
             fromNow(value){
