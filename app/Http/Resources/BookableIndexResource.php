@@ -14,10 +14,12 @@ class BookableIndexResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'average_rating' => $this->average_rating
         ];
     }
 }

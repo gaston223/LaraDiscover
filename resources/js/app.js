@@ -19,6 +19,11 @@ Vue.use(VueRouter);
 Vue.filter("fromNow", value => moment(value).fromNow());
 moment.locale('fr');
 
+//vue-numeral-filter
+import vueNumeralFilterInstaller from 'vue-numeral-filter';
+
+Vue.use(vueNumeralFilterInstaller, { locale: 'fr'});
+
 Vue.component("star-rating", StarRating);
 
 const app = new Vue({

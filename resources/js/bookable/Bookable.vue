@@ -13,7 +13,9 @@
                    <div v-else>Chargement ...</div>
 
                </div>
-                <review-list :bookable-id="this.$route.params.id"></review-list>
+                <div v-if="!loading">
+                    <review-list :bookable-id="this.$route.params.id" :avg-rating="bookable.average_rating" :sum-review="bookable.sum_review"></review-list>
+                </div>
             </div>
             <div class="col-md-4 pb-4">
                 <availability :bookable-id="this.$route.params.id"></availability>
@@ -30,6 +32,10 @@
         components: {
             Availability,
             ReviewList
+        },
+        props: {
+            avgRating: Number,
+            sumReview : Number
         },
         data(){
             return {

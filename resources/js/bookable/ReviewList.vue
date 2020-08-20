@@ -7,19 +7,21 @@
             <h4 class="alert-heading text-center">
                 <div class="row align-items-center">
                     <div class="col-md-12">
-                        Note globale donnée par nos explorateurs
+                        Note globale donnée par nos explorateurs :
+
+                        <div class="col">
+                            {{avgRating  | numeral('0.00')}} /5
+                            <small>( {{sumReview}} Evaluations clients )</small>
+                        </div>
+
+                            <!--{{avgRating}}-->
+                        <div class="col d-flex justify-content-center">
+
+                            <star-rating :rating="avgRating" class="rating pt-2 text-center"></star-rating>
+
+                        </div>
                     </div>
-                    <div class="col">
-                        <span class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </span>
-                        <br>
-                         <small>(Calculée sur 1 avis )</small>
-                    </div>
+
                 </div>
             </h4>
         </div>
@@ -57,11 +59,14 @@
 </template>
 
 <script>
+
     /*import moment from "moment";
     moment.locale('fr');*/
     export default {
         props: {
-            bookableId: String
+            bookableId: [String, Number],
+            avgRating:Number,
+            sumReview : Number
         },
         data(){
             return {
@@ -84,3 +89,4 @@
         }*/
     }
 </script>
+

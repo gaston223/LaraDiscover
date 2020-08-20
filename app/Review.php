@@ -25,4 +25,6 @@ class Review extends Model
     {
         return 'string';
     }
+
+
 }
