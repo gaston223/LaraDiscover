@@ -5,6 +5,7 @@ import VueRouter from "vue-router";
 import Index from "./Index";
 import moment from "moment";
 import StarRating from "./shared/components/StarRating";
+import FatalError from "./shared/components/FatalError"
 //require('bootstrap/dist/css/bootstrap.min.css');
 //require('mdbvue/lib/css/mdb.min.css');
 
@@ -25,11 +26,13 @@ import vueNumeralFilterInstaller from 'vue-numeral-filter';
 Vue.use(vueNumeralFilterInstaller, { locale: 'fr'});
 
 Vue.component("star-rating", StarRating);
+Vue.component("fatal-error", FatalError);
 
 const app = new Vue({
     el: '#app',
     router,
     components : {
-        "index": Index
+        "index": Index,
+
     }
 });
