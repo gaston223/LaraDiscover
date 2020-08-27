@@ -5,7 +5,7 @@
             <div :class="[{'col-md-4':twoColumns},{'d-none': oneColumn}]">
                 <div class="card m-4">
                     <div class="card-body">
-                        <div v-if="loading">Chargement...</div>
+                       <div v-if="loading">Chargement...</div>
                         <div v-if="hasBooking">
                             <p>
                                 Votre réservation à
@@ -34,9 +34,17 @@
                         </div>
                         <div class="form-group md-form">
                             <label for="content" class="text-muted">Décrivez votre expérience ...</label>
-                            <textarea id="content" class="md-textarea form-control" cols="20" rows="5" v-model="review.content"></textarea>
+                            <textarea
+                                id="content"
+                                class="md-textarea form-control"
+                                cols="20"
+                                rows="5"
+                                v-model="review.content"
+                                :class="[{'is-invalid' : errorFor('content')}]">
+                            </textarea>
+                           <v-errors :errors="errorFor('content')"></v-errors>
                         </div>
-                        <button class="btn btn-block aqua-gradient" @click.prevent="submit" :disabled="loading">Envoyer</button>
+                        <button class="btn btn-block aqua-gradient" @click.prevent="submit" :disabled="sending">Envoyer</button>
                     </div>
                 </div>
             </div>
@@ -47,9 +55,11 @@
 </template>
 
 <script>
-    import {is404} from "../shared/utils/response";
+    import {is404, is422} from "../shared/utils/response";
+    import validationErrors from "../shared/mixins/validationErrors";
 
     export default {
+        mixins : [validationErrors],
         data () {
          return{
              review: {
@@ -60,7 +70,8 @@
              existingReview: null,
              loading: false,
              booking : null,
-             error: false
+             error: false,
+             sending: false
          }
         },
         created() {
@@ -92,11 +103,8 @@
                     this.error = true;
                 })
                 .then(() => {
-                    /*console.log(response)*/
                     this.loading = false;
                 });
-
-            // 3. Store the review
         },
         computed: {
             alreadyReviewed() {
@@ -116,13 +124,31 @@
             },
         },
         methods: {
+            // 3. Store the review
             submit(){
-                this.loading = true;
+                this.errors = null;
+                this.sending = true;
+
                 axios.post(`/api/reviews`, this.review)
                     .then(response => console.log(response))
-                    .catch((err) => this.error = true)
-                    .then(() => this.loading = false);
+                    .catch((err) => {
+                        if (is422(err)){
+                            const errors = err.response.data.errors;
+                            if(errors["content"] && 1 === _.size(errors)){
+                                this.errors = errors;
+                                return;
+                            }
+                        }
+                        this.error = true;
+                    })
+                    .then(() => this.sending = false);
             }
         }
     }
 </script>
+
+<style scoped>
+    .form-control.is-invalid ~ div > .invalid-feedback {
+        display: block;
+    }
+</style>
