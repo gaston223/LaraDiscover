@@ -14,25 +14,10 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
+                            <!--<li class="nav-item">
                                 <router-link :to="{name : 'home'}" class="nav-link">Home</router-link>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Second</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Pricing</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">Dropdown
-                                </a>
-                                <div class="dropdown-menu dropdown-default" aria-labelledby="navbarDropdownMenuLink-333">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
-                            </li>
+-->
                         </ul>
                         <ul class="navbar-nav ml-auto nav-flex-icons">
                             <li class="nav-item">
@@ -107,3 +92,22 @@
         font-weight: bold;
     }
 </style>
+
+<script>
+    import { mapState } from 'vuex'
+    export default {
+        data(){
+            return {
+                lastSearch: this.$store.state.lastSearch
+            };
+        },
+        computed: {
+            ...mapState({
+                lastSearchComputed: "lastSearch"
+            }),
+            somethingElse(){
+               return 1+2;
+            }
+        }
+    }
+</script>

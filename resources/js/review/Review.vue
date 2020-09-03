@@ -1,7 +1,11 @@
 <template>
     <div >
+        <success v-if="success">
+            Vous avez évalué votre expérience avec succès, nous vous remercions de votre contribution !
+        </success>
+
         <fatal-error v-if="error"></fatal-error>
-        <div class="row" v-else>
+        <div class="row" v-if="!success && !error">
             <div :class="[{'col-md-4':twoColumns},{'d-none': oneColumn}]">
                 <div class="card m-4">
                     <div class="card-body">
@@ -71,40 +75,31 @@
              loading: false,
              booking : null,
              error: false,
-             sending: false
+             sending: false,
+             success: false
          }
         },
-        created() {
+       async created() {
             this.review.id = this.$route.params.id;
             this.loading = true;
-            // 1. If review already exists(in reviews by Id)
-            axios.get(`/api/reviews/${this.review.id}`)
-                .then(response => {
-                    this.existingReview = response.data.data
-                })
-                .catch(err => {
-                    if(
-                        is404(err)
-                    ){
+
+            try{
+                // 1. If review already exists(in reviews by Id)
+                this.existingReview = (await axios.get(`/api/reviews/${this.review.id}`)).data.data;
+            } catch (err) {
+                if(is404(err)){
+                    try {
                         // 2. Fetch a booking by a review key
-                        return axios.get(`/api/booking-by-review/${this.review.id}`)
-                            .then(response => {
-                                this.booking = response.data.data;
-                            }).catch((err) => {
-                                this.error = !is404(err);
-
-                                //is404(err) ? {} : (this.error = true);
-
-                                /*if(!is404(err)){
-                                    this.error = true;
-                                }*/
-                            });
+                        this.booking = (await axios.get(`/api/booking-by-review/${this.review.id}`)).data.data;
+                    } catch (err) {
+                        this.error = !is404(err);
                     }
+
+                } else{
                     this.error = true;
-                })
-                .then(() => {
-                    this.loading = false;
-                });
+                }
+            }
+            this.loading = false;
         },
         computed: {
             alreadyReviewed() {
@@ -128,9 +123,12 @@
             submit(){
                 this.errors = null;
                 this.sending = true;
+                this.success = false;
 
                 axios.post(`/api/reviews`, this.review)
-                    .then(response => console.log(response))
+                    .then(response =>{
+                        this.success = 201 === response.status;
+                    })
                     .catch((err) => {
                         if (is422(err)){
                             const errors = err.response.data.errors;

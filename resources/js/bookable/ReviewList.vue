@@ -10,7 +10,7 @@
                         Moyenne globale donnée par nos explorateurs :
 
                         <div class="col">
-                            {{avgRating  | numeral('0.00')}} /5
+                            {{avgRating  | numeral('0')}} /5
                             <small>(sur {{sumReview}} évaluations clients )</small>
                         </div>
 

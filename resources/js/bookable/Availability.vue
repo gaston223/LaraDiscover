@@ -7,7 +7,8 @@
         <div class="row">
 
             <div class="col-md-6">
-                <div class="md-form mb-0">
+                <div class="md-form">
+                    <!--<label for="from">Date de départ</label>-->
                     <input
                         v-model="from"
                         @keyup.enter="check"
@@ -15,10 +16,11 @@
                         id="from"
                         class="form-control"
                         name="from"
+                        placeholder="Date de Départ"
                         :class="[{'is-invalid' : errorFor('from')}]"
                     >
                     <v-errors :errors="errorFor('from')"></v-errors>
-                    <label for="from">Date de départ</label>
+
                 </div>
             </div>
             <div class="col-md-6">
@@ -30,10 +32,11 @@
                         id="to"
                         class="form-control"
                         name="to"
+                        placeholder="Date d'arrivée"
                         :class="[{'is-invalid' : errorFor('to')}]"
                     >
                    <v-errors :errors="errorFor('to')"></v-errors>
-                    <label for="to">Date d'arrivée</label>
+                   <!-- <label for="to">Date d'arrivée</label>-->
                 </div>
             </div>
         </div>
@@ -53,8 +56,8 @@
         },
         data(){
             return {
-                from: null,
-                to: null,
+                from: this.$store.state.lastSearch.from,
+                to: this.$store.state.lastSearch.to,
                 loading: false,
                 status: null,
             };
@@ -63,6 +66,12 @@
             check(){
                this.loading = true;
                this.errors = null;
+
+               this.$store.dispatch('setLastSearch', {
+                   from : this.from,
+                   to : this.to
+               })
+
                axios.get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`)
                     .then(response => {
                         this.status = response.status;
