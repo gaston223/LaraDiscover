@@ -1,11 +1,10 @@
 require('./bootstrap');
-require('popper.js')
+require('popper.js');
+
 import router from "./routes";
 import VueRouter from "vue-router";
 import Vuex from 'vuex';
-
 import moment from "moment";
-
 import Index from "./Index";
 import StarRating from "./shared/components/StarRating";
 import FatalError from "./shared/components/FatalError"
