@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <body class="creative-lp">
+        <body>
 
         <header>
         <!--Navbar -->
@@ -63,7 +63,7 @@
 
                     <h2 class="card-title h2 my-4 py-2">Profitez des meilleurs expériences !</h2>
                     <p class="mb-4 pb-2 px-md-5 mx-md-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur obcaecati vero aliquid libero doloribus ad, unde tempora maiores, ullam, modi qui quidem minima debitis perferendis vitae cumque et quo impedit.</p>
-                    <a class="btn btn-rounded default-color"><i class="fas fa-clone left"></i> RESERVATION</a>
+                    <a class="btn btn-rounded purple-gradient"><i class="fas fa-clone left"></i> RESERVATION</a>
 
                 </div>
             </div>

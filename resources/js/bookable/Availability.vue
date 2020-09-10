@@ -1,8 +1,11 @@
 <template>
     <div>
         <h6 class="text-uppercase blue-grey-text font-weight-bolder">Verifier la disponibilité</h6>
-        <span class="badge badge-pill badge-danger" v-if="noAvailability">Pas Disponible</span>
-        <span class="badge badge-pill badge-success" v-if="hasAvailability">Disponible</span>
+        <transition name="fade">
+            <span class="badge badge-pill badge-danger" v-if="noAvailability">Indisponible</span>
+            <span class="badge badge-pill badge-success" v-if="hasAvailability">Disponible</span>
+        </transition>
+
 
         <div class="row">
             <div class="col-md-6">
@@ -10,12 +13,12 @@
                     :masks="{ input: ['DD-MM-YYYY']}"
                     :input-props='{
                         class: "form-control",
-                        name: from,
+                        name: "from",
                         placeholder: "Date de départ"
                         }'
                     :class="[{'is-invalid' : errorFor('from')}] "
 
-                    v-model="from"
+                    v-model='from'
                 >   </date-picker>
                 <v-errors :errors="errorFor('from')"></v-errors>
             </div>
@@ -23,11 +26,12 @@
                 <date-picker
                     :masks="{ input: ['DD-MM-YYYY']}"
                     :input-props='{
-                        name: to,
+                        class: "form-control",
+                        name: "to",
                         placeholder: "Date de fin"
                         }'
                     :class="[{'is-invalid' : errorFor('to')}]"
-                     v-model="to"
+                     v-model='to'
                 >
                 </date-picker>
                 <v-errors :errors="errorFor('to')"></v-errors>
@@ -108,7 +112,10 @@
             </div>
         </div>-->
 
-        <button class="btn btn-block aqua-gradient" @click.prevent="check" :disabled="loading">Vérifier</button>
+        <button class="btn btn-block purple-gradient" @click.prevent="check" :disabled="loading">
+            <span v-if="!loading">Vérifier</span>
+            <span v-if="loading">  <i class="fas fa-circle-notch fa-spin"></i> Verification...</span>
+        </button>
     </div>
 
 </template>
