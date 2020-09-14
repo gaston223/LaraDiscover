@@ -18,7 +18,15 @@
                 </div>
             </div>
             <div class="col-md-4 pb-4">
-                <availability :bookable-id="this.$route.params.id"></availability>
+                <availability :bookable-id="this.$route.params.id" @availability="checkPrice($event)" class="mb-4"></availability>
+
+                <transition name="fade">
+                    <price-breakdown v-if="price" :price="price"></price-breakdown>
+                </transition>
+                <transition name="fade">
+                    <button type="button" class="btn btn-block purple-gradient" v-if="price">Réserver</button>
+                </transition>
+
             </div>
         </div>
 
@@ -28,10 +36,14 @@
 <script>
     import Availability from "./Availability";
     import ReviewList from "./ReviewList";
+    import PriceBreakdown from "./PriceBreakdown";
+    import { mapState } from 'vuex';
+    import moment from 'moment';
     export default {
         components: {
             Availability,
-            ReviewList
+            ReviewList,
+            PriceBreakdown
         },
         props: {
             avgRating: Number,
@@ -40,7 +52,8 @@
         data(){
             return {
                 bookable: null,
-                loading : false
+                loading : false,
+                price: null
             }
         },
         created() {
@@ -51,6 +64,23 @@
                     this.bookable = response.data.data;
                     this.loading = false
                 });
+        },
+        computed:mapState({
+            lastSearch: "lastSearch"
+        }),
+        methods: {
+           async checkPrice(hasAvailability){
+                if(!hasAvailability){
+                    this.price = null;
+                    return;
+                }
+                try{
+                    this.price = (await axios.get(`/api/bookables/${this.bookable.id}/price?from=${moment(this.lastSearch.from).format('YYYY-MM-DD') }&to=${moment(this.lastSearch.to).format('YYYY-MM-DD')}`
+                    )).data.data;
+                }catch (e) {
+                    this.price = null;
+                }
+            }
         }
     }
 </script>

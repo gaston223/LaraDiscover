@@ -112,7 +112,7 @@
             </div>
         </div>-->
 
-        <button class="btn btn-block purple-gradient" @click.prevent="check" :disabled="loading">
+        <button class="btn btn-outline-secondary btn-block waves-effect" @click.prevent="check" :disabled="loading">
             <span v-if="!loading">Vérifier</span>
             <span v-if="loading">  <i class="fas fa-circle-notch fa-spin"></i> Verification...</span>
         </button>
@@ -147,24 +147,28 @@
             };
         },
         methods : {
-            check(){
+           async check(){
                this.loading = true;
                this.errors = null;
 
                this.$store.dispatch('setLastSearch', {
                    from : this.from,
                    to : this.to
-               })
+               });
 
-               axios.get(`/api/bookables/${this.bookableId}/availability?from=${ moment(this.from).format('YYYY-MM-DD') }&to=${moment(this.to).format('YYYY-MM-DD')}`)
-                    .then(response => {
-                        this.status = response.status;
-                    }).catch(error => {
-                        if(is422(error)){
-                            this.errors = error.response.data.errors;
-                        }
-                        this.status = error.response.status;
-                    }).then(()=> (this.loading = false));
+               try {
+                   this.status = (await axios.get(
+                       `/api/bookables/${this.bookableId}/availability?from=${ moment(this.from).format('YYYY-MM-DD') }&to=${moment(this.to).format('YYYY-MM-DD')}`))
+                       .status;
+                   this.$emit("availability", this.hasAvailability)
+               }catch (error) {
+                   if(is422(error)){
+                       this.errors = error.response.data.errors;
+                   }
+                   this.status = error.response.status;
+               }
+               this.loading = false;
+
             }
         },
         computed: {
