@@ -9,7 +9,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <date-picker
+                <v-date-picker
                     :masks="{ input: ['DD-MM-YYYY']}"
                     :input-props='{
                         class: "form-control",
@@ -19,11 +19,11 @@
                     :class="[{'is-invalid' : errorFor('from')}] "
 
                     v-model='from'
-                >   </date-picker>
+                >   </v-date-picker>
                 <v-errors :errors="errorFor('from')"></v-errors>
             </div>
             <div class="col-md-6">
-                <date-picker
+                <v-date-picker
                     :masks="{ input: ['DD-MM-YYYY']}"
                     :input-props='{
                         class: "form-control",
@@ -33,11 +33,10 @@
                     :class="[{'is-invalid' : errorFor('to')}]"
                      v-model='to'
                 >
-                </date-picker>
+                </v-date-picker>
                 <v-errors :errors="errorFor('to')"></v-errors>
             </div>
         </div>
-
 
 
         <div class="row">
@@ -124,13 +123,13 @@
     import {is422} from "../shared/utils/response";
     import validationErrors from "../shared/mixins/validationErrors";
     import Calendar from 'v-calendar/lib/components/calendar.umd';
-    import DatePicker from 'v-calendar/lib/components/date-picker.umd';
+    import VDatePicker from 'v-calendar/lib/components/date-picker.umd';
     import moment from 'moment'
 
     export default {
         components:{
             Calendar,
-            DatePicker
+            VDatePicker
         },
         mixins : [validationErrors],
         props: {
@@ -148,6 +147,8 @@
         },
         methods : {
            async check(){
+               this.from = moment(this.from).format('YYYY-MM-DD')
+               this.to = moment(this.to).format('YYYY-MM-DD')
                this.loading = true;
                this.errors = null;
 
@@ -158,7 +159,7 @@
 
                try {
                    this.status = (await axios.get(
-                       `/api/bookables/${this.bookableId}/availability?from=${ moment(this.from).format('YYYY-MM-DD') }&to=${moment(this.to).format('YYYY-MM-DD')}`))
+                       `/api/bookables/${this.bookableId}/availability?from=${ this.from}&to=${this.to}`))
                        .status;
                    this.$emit("availability", this.hasAvailability)
                }catch (error) {

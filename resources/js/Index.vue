@@ -20,16 +20,6 @@
 -->
                         </ul>
                         <ul class="navbar-nav ml-auto nav-flex-icons">
-                            <li class="nav-item">
-                                <a class="nav-link waves-effect waves-light">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link waves-effect waves-light">
-                                    <i class="fab fa-google-plus-g"></i>
-                                </a>
-                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-334" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
@@ -42,6 +32,14 @@
                                     <a class="dropdown-item" href="#">Another action</a>
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
+                            </li>
+
+                            <li class="nav-item">
+                                <router-link :to="{name:'home'}" class="nav-link waves-effect">
+                                    <span v-if="itemsInBasket" class="badge red z-depth-1 mr-1">{{itemsInBasket}}</span>
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="clearfix d-none d-sm-inline-block"> Panier </span>
+                                </router-link>
                             </li>
                         </ul>
                     </div>
@@ -94,7 +92,7 @@
 </style>
 
 <script>
-    import { mapState } from 'vuex';
+    import { mapState, mapGetters } from 'vuex';
     export default {
         data(){
             return {
@@ -104,6 +102,9 @@
         computed: {
             ...mapState({
                 lastSearchComputed: "lastSearch"
+            }),
+            ...mapGetters({
+               itemsInBasket: 'itemsInBasket'
             }),
             somethingElse(){
                return 1+2;

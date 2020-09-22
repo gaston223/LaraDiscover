@@ -24,8 +24,24 @@
                     <price-breakdown v-if="price" :price="price"></price-breakdown>
                 </transition>
                 <transition name="fade">
-                    <button type="button" class="btn btn-block purple-gradient" v-if="price">Réserver</button>
+                    <button type="button"
+                            class="btn btn-block purple-gradient mb-2"
+                            v-if="price"
+                            @click="addToBasket"
+                            :disabled="inBasketAlready"
+                    >Réserver
+                    </button>
                 </transition>
+
+                <button type="button"
+                        class="btn btn-block purple-gradient"
+                        v-if="inBasketAlready"
+                         @click="removeFromBasket"
+                >Supprimer du Panier
+                </button>
+                <div v-if="inBasketAlready" class="mt-4 text-muted warning">
+                    Vous avez déja ajouté cette réservation dans le panier !
+                </div>
 
             </div>
         </div>
@@ -65,22 +81,49 @@
                     this.loading = false
                 });
         },
-        computed:mapState({
-            lastSearch: "lastSearch"
-        }),
+        computed:{
+            ...mapState({
+                lastSearch: "lastSearch",
+            }),
+            inBasketAlready(){
+                if (null === this.bookable){
+                    return false;
+                }
+                return this.$store.getters.inBasketAlready(this.bookable.id);
+            }
+        },
         methods: {
            async checkPrice(hasAvailability){
+               this.lastSearch.from = moment(this.lastSearch.from).format('YYYY-MM-DD')
+               this.lastSearch.to = moment(this.lastSearch.to).format('YYYY-MM-DD')
                 if(!hasAvailability){
                     this.price = null;
                     return;
                 }
                 try{
-                    this.price = (await axios.get(`/api/bookables/${this.bookable.id}/price?from=${moment(this.lastSearch.from).format('YYYY-MM-DD') }&to=${moment(this.lastSearch.to).format('YYYY-MM-DD')}`
+                    this.price = (await axios.get(
+                        `/api/bookables/${this.bookable.id}/price?from=${this.lastSearch.from}&to=${this.lastSearch.to}`
                     )).data.data;
                 }catch (e) {
                     this.price = null;
                 }
+            },
+            addToBasket(){
+               this.$store.dispatch("addToBasket", {
+                   bookable: this.bookable,
+                   price : this.price,
+                   dates : this.lastSearch
+               });
+            },
+            removeFromBasket(){
+               this.$store.dispatch("removeFromBasket", this.bookable.id);
             }
+
         }
     }
 </script>
+<style scoped>
+    .warning{
+        font-size: 0.7rem;
+    }
+</style>

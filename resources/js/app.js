@@ -12,6 +12,8 @@ import Success from "./shared/components/Success"
 import ValidationErrors from "./shared/components/ValidationErrors"
 import storeDefinition from "./store";
 
+
+
 //require('bootstrap/dist/css/bootstrap.min.css');
 //require('mdbvue/lib/css/mdb.min.css');
 
@@ -29,6 +31,7 @@ import vueNumeralFilterInstaller from 'vue-numeral-filter';
 
 Vue.use(vueNumeralFilterInstaller, { locale: 'fr'});
 
+
 Vue.component("star-rating", StarRating);
 Vue.component("fatal-error", FatalError);
 Vue.component("success", Success);
@@ -41,7 +44,7 @@ const app = new Vue({
     router,
     store,
     components : {
-        "index": Index,
+        "index": Index
     },
     beforeCreate() {
         this.$store.dispatch("loadStoredState");

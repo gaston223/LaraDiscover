@@ -10,8 +10,7 @@
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
