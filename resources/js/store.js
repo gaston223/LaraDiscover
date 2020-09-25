@@ -44,9 +44,14 @@ export default {
             localStorage.setItem('basket', JSON.stringify(state.basket));
 
         },
+        //context.commit, context.state
         removeFromBasket({ commit, state }, payload){
             commit('removeFromBasket', payload);
             localStorage.setItem('basket', JSON.stringify(state.basket));
+        },
+        clearBasket({commit, state}, payload){
+            commit("setBasket", {items: [] });
+            localStorage.setItem("basket", JSON.stringify(state.basket))
         }
     },
     getters : {
@@ -57,6 +62,7 @@ export default {
                     (result, item) => result || item.bookable.id === id, false
                 );
             };
-        }
+        },
+        /*basketTotalPrice:(state) => state.basket.items.price.reduce(result, item)*/
     }
 };

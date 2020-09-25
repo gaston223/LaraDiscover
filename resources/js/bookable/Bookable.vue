@@ -29,7 +29,7 @@
                             v-if="price"
                             @click="addToBasket"
                             :disabled="inBasketAlready"
-                    >Réserver
+                    >Ajouter au panier
                     </button>
                 </transition>
 

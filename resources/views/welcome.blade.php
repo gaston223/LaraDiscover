@@ -28,30 +28,7 @@
     <!-- Bootstrap core JavaScript -->
     <script type="text/javascript" src=" {{asset('./mdb/js/bootstrap.min.js')}}"></script>--}}
     <!-- MDB core JavaScript -->
-    <script>
-        $( document ).ready(function() {
-            $.extend($.fn.pickadate.defaults, {
-                monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre',
-                    'Novembre', 'Décembre'],
-                weekdaysShort: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
-                today: 'aujourd\'hui',
-                clear: 'effacer',
-                formatSubmit: 'yyyy-mm-dd'
-            })
 
-// Or, pass the months and weekdays as an array for each invocation.
-            $('.datepicker').pickadate({
-                monthsFull: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre',
-                    'Novembre', 'Décembre'],
-                weekdaysShort: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
-                today: 'aujourd\'hui',
-                clear: 'effacer',
-                close: 'fermer',
-                formatSubmit: 'yyyy-mm-dd'
-            })
-        })
-
-       </script>
     <script type="text/javascript" src=" {{asset('./mdb/js/mdb.min.js')}}" defer></script>
     <script type="text/javascript" src=" {{asset('./mdb/js/addons/datatables.min.js')}}" defer></script>
 

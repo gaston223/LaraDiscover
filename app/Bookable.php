@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Bookable extends Model
@@ -43,6 +44,19 @@ class Bookable extends Model
     public function getSumReviewAttribute()
     {
         return $this->review()->count();
+    }
+
+    public function priceFor($from, $to) :array
+    {
+        $days = (new Carbon($from))->diffInDays(new Carbon ($to)) + 1;
+        $price = $days * $this->price;
+
+        return [
+            'total' => $price,
+            'breakdown' => [
+                $this->price => $days
+            ]
+        ];
     }
 
 }

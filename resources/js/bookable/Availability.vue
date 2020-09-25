@@ -6,80 +6,26 @@
             <span class="badge badge-pill badge-success" v-if="hasAvailability">Disponible</span>
         </transition>
 
-
-        <div class="row">
+        <div class="row" >
             <div class="col-md-6">
-                <v-date-picker
-                    :masks="{ input: ['DD-MM-YYYY']}"
-                    :input-props='{
-                        class: "form-control",
-                        name: "from",
-                        placeholder: "Date de départ"
-                        }'
-                    :class="[{'is-invalid' : errorFor('from')}] "
-
-                    v-model='from'
-                >   </v-date-picker>
-                <v-errors :errors="errorFor('from')"></v-errors>
-            </div>
-            <div class="col-md-6">
-                <v-date-picker
-                    :masks="{ input: ['DD-MM-YYYY']}"
-                    :input-props='{
-                        class: "form-control",
-                        name: "to",
-                        placeholder: "Date de fin"
-                        }'
-                    :class="[{'is-invalid' : errorFor('to')}]"
-                     v-model='to'
-                >
-                </v-date-picker>
-                <v-errors :errors="errorFor('to')"></v-errors>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col-md-6">
-
                 <div class="md-form">
-                    <input
-                        v-show="inputFrom"
-                        placeholder="Selected date"
-                        type="text"
-                        id="date-picker-example"
-                        class="form-control datepicker"
-                        @keyup.enter="check"
-                        name="from"
-                        :class="[{'is-invalid' : errorFor('from')}]"
-                    >
+                    <datepicker v-model="from" name="from" :value="from" :input-class="[{'is-invalid' : errorFor('from')}]" :language='fr'></datepicker>
                     <v-errors :errors="errorFor('from')"></v-errors>
-
                 </div>
             </div>
             <div class="col-md-6">
-
                 <div class="md-form">
-                    <input
-                        v-show="inputTo"
-                        placeholder="Selected date"
-                        type="text"
-                        id="date-picker-example2"
-                        class="form-control datepicker"
-                        @keyup.enter="check"
-                        name="to"
-                        :class="[{'is-invalid' : errorFor('to')}]"
-                    >
+                    <datepicker v-model="to" name="to" :value="to" :input-class="[{'is-invalid' : errorFor('to')}]" :language='fr'></datepicker>
                     <v-errors :errors="errorFor('to')"></v-errors>
                 </div>
             </div>
         </div>
 
-
-       <!-- <div class="row">
+        <div class="row" >
             <div class="col-md-6">
-                &lt;!&ndash;<div class="md-form">
+                <div class="md-form">
                     <input
+                        v-show="fake"
                         v-model="from"
                         @keyup.enter="check"
                         type="text"
@@ -91,11 +37,12 @@
                     >
                     <v-errors :errors="errorFor('from')"></v-errors>
 
-                </div>&ndash;&gt;
+                </div>
             </div>
             <div class="col-md-6">
                 <div class="md-form mb-0">
                     <input
+                        v-show="fake"
                         v-model="to"
                         @keyup.enter="check"
                         type="text"
@@ -106,10 +53,11 @@
                         :class="[{'is-invalid' : errorFor('to')}]"
                     >
                    <v-errors :errors="errorFor('to')"></v-errors>
-                   &lt;!&ndash; <label for="to">Date d'arrivée</label>&ndash;&gt;
+                   <!-- <label for="to">Date d'arrivée</label>-->
                 </div>
             </div>
-        </div>-->
+        </div>
+
 
         <button class="btn btn-outline-secondary btn-block waves-effect" @click.prevent="check" :disabled="loading">
             <span v-if="!loading">Vérifier</span>
@@ -122,14 +70,14 @@
 <script>
     import {is422} from "../shared/utils/response";
     import validationErrors from "../shared/mixins/validationErrors";
-    import Calendar from 'v-calendar/lib/components/calendar.umd';
-    import VDatePicker from 'v-calendar/lib/components/date-picker.umd';
-    import moment from 'moment'
+    import moment from 'moment';
+    import Datepicker from 'vuejs-datepicker';
+    import {fr} from 'vuejs-datepicker/dist/locale'
+
 
     export default {
         components:{
-            Calendar,
-            VDatePicker
+            Datepicker
         },
         mixins : [validationErrors],
         props: {
@@ -137,12 +85,12 @@
         },
         data(){
             return {
+                fake : false,
                 from: this.$store.state.lastSearch.from,
                 to: this.$store.state.lastSearch.to,
                 loading: false,
                 status: null,
-                inputFrom: false,
-                inputTo: false
+                fr: fr
             };
         },
         methods : {
@@ -159,7 +107,7 @@
 
                try {
                    this.status = (await axios.get(
-                       `/api/bookables/${this.bookableId}/availability?from=${ this.from}&to=${this.to}`))
+                       `/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`))
                        .status;
                    this.$emit("availability", this.hasAvailability)
                }catch (error) {

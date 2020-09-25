@@ -35,7 +35,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <router-link :to="{name:'home'}" class="nav-link waves-effect">
+                                <router-link :to="{name:'basket'}" class="nav-link waves-effect">
                                     <span v-if="itemsInBasket" class="badge red z-depth-1 mr-1">{{itemsInBasket}}</span>
                                     <i class="fas fa-shopping-cart"></i>
                                     <span class="clearfix d-none d-sm-inline-block"> Panier </span>

@@ -24,6 +24,7 @@ Vue.use(Vuex)
 
 //Moment.js
 Vue.filter("fromNow", value => moment(value).fromNow());
+Vue.filter("date", value => moment(value).format('DD-MM-YYYY'));
 moment.locale('fr');
 
 //vue-numeral-filter
