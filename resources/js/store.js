@@ -56,6 +56,12 @@ export default {
     },
     getters : {
         itemsInBasket: (state) => state.basket.items.length,
+        /*getTotal: state => {
+            const totalItems = state.basket.items.length
+            return state.basket.items.reduce(
+                (total, item) =>  total.price.total + item.price.total,
+            );
+        },*/
         inBasketAlready(state) {
             return function (id) {
                 return state.basket.items.reduce(
@@ -63,6 +69,6 @@ export default {
                 );
             };
         },
-        /*basketTotalPrice:(state) => state.basket.items.price.reduce(result, item)*/
+
     }
 };

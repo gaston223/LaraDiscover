@@ -28,28 +28,31 @@
             <p class="card-text mt-2"> {{ description }}</p>
 
             <!--Grid row-->
-            <div class="row">
+            <div class="row single-line">
 
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-12 text-center">
                     <p class="dark-grey-text">
-                        <i class="fas fa-hotel dark-grey-text" aria-hidden="true"></i> 1 bed
+                        <i class="fas fa-gas-pump"></i>
+                         <span v-if="title.length > 18"> Essence</span>
+                         <span v-else> Diesel</span>
                     </p>
                 </div>
                 <!--Grid column-->
 
                 <!--Grid column-->
-                <div class="col-lg-4 col-md-12 text-center">
+                <div class="col-lg-4 col-md-12 text-center" style="text-align: justify">
                     <p class="dark-grey-text">
-                        <i class="fas fa-utensils dark-grey-text" aria-hidden="true"></i> Launches
+                        <i class="far fa-snowflake"></i> Clim
                     </p>
                 </div>
                 <!--Grid column-->
 
+
                 <!--Grid column-->
                 <div class="col-lg-4 col-md-12 text-center">
                     <p class="dark-grey-text">
-                        <i class="fas fa-wifi dark-grey-text" aria-hidden="true"></i> Wi-Fi</p>
+                        <i class="fab fa-bluetooth"></i> Bluetooth</p>
                 </div>
                 <!--Grid column-->
 
@@ -78,3 +81,5 @@
         props: {"title": String, "description" : String, "id" : Number},
     }
 </script>
+<style scoped>
+</style>

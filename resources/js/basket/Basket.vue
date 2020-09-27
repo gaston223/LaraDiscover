@@ -187,13 +187,10 @@
 
                             <li class="list-group-item d-flex justify-content-between">
                                 <span>Total</span>
-                                <strong>20€</strong>
+                                <strong> €</strong>
                             </li>
-
                         </ul>
                         <!--Cart-->
-
-
             </div>
         </div>
     </div>
