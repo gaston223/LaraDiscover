@@ -20,18 +20,42 @@
 -->
                         </ul>
                         <ul class="navbar-nav ml-auto nav-flex-icons">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-334" data-toggle="dropdown"
+                            <li class="nav-item" v-if="isLoggedIn">
+                                <router-link :to="{name:'basket'}" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                             aria-haspopup="true" aria-expanded="false">
+                                    Bonjour {{currentUser.name}}
+                                    <i class="fas fa-user"></i>
+                                </router-link>
+                                <!--<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-334" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
                                     Bonjour Gaoussou
                                     <i class="fas fa-user"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right dropdown-default"
+                                </a>-->
+                                <!--<div class="dropdown-menu dropdown-menu-right dropdown-default"
                                      aria-labelledby="navbarDropdownMenuLink-334">
                                     <a class="dropdown-item" href="#">Action</a>
                                     <a class="dropdown-item" href="#">Another action</a>
                                     <a class="dropdown-item" href="#">Something else here</a>
-                                </div>
+                                </div>-->
+                            </li>
+
+                            <li class="nav-item" v-if="!isLoggedIn">
+                                <router-link :to="{name:'register'}" class="nav-link waves-effect">
+                                   Inscription
+                                    <i class="fas fa-user-plus"></i>
+                                </router-link>
+                            </li>
+                            <li class="nav-item" v-if="!isLoggedIn">
+                                <router-link :to="{name:'login'}" class="nav-link waves-effect">
+                                   Connexion
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </router-link>
+                            </li>
+                            <li class="nav-item" v-if="isLoggedIn">
+                                <a class="nav-link waves-effect" href="#" @click.prevent="logout">
+                                    Déconnexion
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </a>
                             </li>
 
                             <li class="nav-item">
@@ -80,6 +104,7 @@
 
 <script>
     import { mapState, mapGetters } from 'vuex';
+    import {logOut} from "./shared/utils/auth";
     export default {
         data(){
             return {
@@ -88,13 +113,25 @@
         },
         computed: {
             ...mapState({
-                lastSearchComputed: "lastSearch"
+                lastSearchComputed: "lastSearch",
+                isLoggedIn: "isLoggedIn"
             }),
             ...mapGetters({
-               itemsInBasket: 'itemsInBasket'
+               itemsInBasket: 'itemsInBasket',
+                currentUser : 'currentUser'
             }),
             somethingElse(){
                return 1+2;
+            }
+        },
+        methods :{
+            async logout (){
+               try {
+                axios.post("/logout");
+               this.$store.dispatch("logout");
+               } catch (error) {
+                   this.$store.dispatch("logout");
+               }
             }
         }
     }

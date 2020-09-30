@@ -48,6 +48,7 @@ export default {
             if (basket){
                 context.commit('setBasket', JSON.parse(basket));
             }
+            context.commit("setLoggedIn", isLoggedIn());
         },
         addToBasket({ commit, state }, payload){
             commit('addToBasket', payload);
@@ -97,6 +98,7 @@ export default {
                 );
             };
         },
+        currentUser:(state) => state.user
 
     }
 };

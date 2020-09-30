@@ -67,7 +67,7 @@
 
                         <!-- Register -->
                         <p>Pas encore inscrit?
-                            <router-link :to="{name: 'home'}">Inscription</router-link>
+                            <router-link :to="{name: 'register'}">Inscription</router-link>
                         </p>
 
                     </form>
