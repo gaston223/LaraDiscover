@@ -10,7 +10,8 @@ export default {
             items: []
         },
         isLoggedIn: false,
-        user: {}
+        user: {
+        }
     },
     mutations: {
         setLastSearch(state, payload) {
@@ -37,6 +38,10 @@ export default {
         setLastSearch(context, payload) {
             context.commit('setLastSearch', payload);
             localStorage.setItem('lastSearch', JSON.stringify(payload))
+        },
+        setUser(context, payload) {
+            context.commit('setUser', payload);
+            localStorage.setItem('user', JSON.stringify(payload))
         },
         loadStoredState(context) {
             const lastSearch = localStorage.getItem('lastSearch');
@@ -71,7 +76,6 @@ export default {
                     commit("setUser", user);
                     commit("setLoggedIn", true);
                 }catch (error) {
-
                     dispatch("logout");
                 }
             }

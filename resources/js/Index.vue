@@ -20,23 +20,19 @@
 -->
                         </ul>
                         <ul class="navbar-nav ml-auto nav-flex-icons">
-                            <li class="nav-item" v-if="isLoggedIn">
-                                <router-link :to="{name:'basket'}" class="nav-link dropdown-toggle" data-toggle="dropdown"
-                                             aria-haspopup="true" aria-expanded="false">
+                            <li class="nav-item dropdown" v-if="isLoggedIn">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
                                     Bonjour {{currentUser.name}}
                                     <i class="fas fa-user"></i>
-                                </router-link>
-                                <!--<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-334" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    Bonjour Gaoussou
-                                    <i class="fas fa-user"></i>
-                                </a>-->
-                                <!--<div class="dropdown-menu dropdown-menu-right dropdown-default"
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right dropdown-default"
                                      aria-labelledby="navbarDropdownMenuLink-334">
-                                    <a class="dropdown-item" href="#">Action</a>
-                                    <a class="dropdown-item" href="#">Another action</a>
-                                    <a class="dropdown-item" href="#">Something else here</a>
-                                </div>-->
+                                    <router-link :to="{name:'bookings',params: { id : user.id} }" class="dropdown-item">
+                                        Mon Compte
+                                    </router-link>
+                                </div>
                             </li>
 
                             <li class="nav-item" v-if="!isLoggedIn">
@@ -108,13 +104,15 @@
     export default {
         data(){
             return {
-                lastSearch: this.$store.state.lastSearch
+                lastSearch: this.$store.state.lastSearch,
+                //userId: this.$store.state.user.id
             };
         },
         computed: {
             ...mapState({
                 lastSearchComputed: "lastSearch",
-                isLoggedIn: "isLoggedIn"
+                isLoggedIn: "isLoggedIn",
+                user: "user"
             }),
             ...mapGetters({
                itemsInBasket: 'itemsInBasket',

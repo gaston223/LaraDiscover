@@ -9,13 +9,13 @@
         <div class="row" >
             <div class="col-md-6">
                 <div class="md-form">
-                    <datepicker v-model="from" name="from" :value="from" :input-class="[{'is-invalid' : errorFor('from')}]" :language='fr'></datepicker>
+                    <datepicker v-model="from" name="from" :value="from" placeholder="Date de début"  :input-class="[{'is-invalid' : errorFor('from')}]" :language='fr'></datepicker>
                     <v-errors :errors="errorFor('from')"></v-errors>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="md-form">
-                    <datepicker v-model="to" name="to" :value="to" :input-class="[{'is-invalid' : errorFor('to')}]" :language='fr'></datepicker>
+                    <datepicker v-model="to" name="to" :value="to" placeholder="Date de fin" :input-class="[{'is-invalid' : errorFor('to')}]" :language='fr'></datepicker>
                     <v-errors :errors="errorFor('to')"></v-errors>
                 </div>
             </div>

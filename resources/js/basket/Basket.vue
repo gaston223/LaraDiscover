@@ -185,10 +185,10 @@
                                 </li>
                             </transition-group>
 
-                            <li class="list-group-item d-flex justify-content-between">
+                           <!-- <li class="list-group-item d-flex justify-content-between">
                                 <span>Total</span>
                                 <strong> €</strong>
-                            </li>
+                            </li>-->
                         </ul>
                         <!--Cart-->
             </div>
@@ -198,12 +198,14 @@
 <script>
     import {mapGetters, mapState} from "vuex";
     import validationErrors from "../shared/mixins/validationErrors";
+    import {isLoggedIn} from "../shared/utils/auth";
     export default {
         mixins : [validationErrors],
         data(){
             return{
                 loading: false,
                 bookingAttempted: false,
+                userId : this.$store.state.user.id,
                 customer: {
                     first_name:null,
                     last_name:null,
@@ -218,7 +220,8 @@
         computed: {
             ...mapGetters(["itemsInBasket"]),
             ...mapState({
-                basket: state => state.basket.items
+                basket: state => state.basket.items,
+                user: state => state.user
             }),
             success(){
                 return !this.loading && 0 === this.itemsInBasket && this.bookingAttempted;
@@ -226,6 +229,12 @@
         },
         methods : {
             async book(){
+
+                //Check if current user is authenticated
+                if (!isLoggedIn()){
+                    await this.$router.push({name: 'login'})
+                }
+
             this.loading = true;
             this.bookingAttempted = false;
             this.errors = null;
@@ -236,9 +245,11 @@
                     bookings :this.basket.map(basketItem => ({
                         bookable_id : basketItem.bookable.id,
                         from : basketItem.dates.from,
-                        to : basketItem.dates.to
+                        to : basketItem.dates.to,
+                        user_id: this.user.id
                     }))
                 });
+                console.log(this.customer)
                 await this.$store.dispatch("clearBasket")
             }catch (err) {
                 this.errors = err.response && err.response.data.errors;

@@ -23,6 +23,7 @@ class CheckoutController extends Controller
            'bookings.*.bookable_id' => 'required|exists:bookables,id',
            'bookings.*.from' => 'required|date|after_or_equal:today',
            'bookings.*.to' => 'required|date|after_or_equal:bookings.*.from',
+           'bookings.*.user_id' => 'required',
            'customer.first_name' => 'required|min:2',
            'customer.last_name' => 'required|min:2',
            'customer.street' => 'required|min:3',
@@ -50,6 +51,7 @@ class CheckoutController extends Controller
             $booking = new Booking();
             $booking->from = $bookingData['from'];
             $booking->to = $bookingData['to'];
+            $booking->user_id = $bookingData['user_id'];
             $booking->price = $bookable->priceFor($booking->from, $booking->to)['total'];
             $booking->bookable()->associate($bookable);
 
