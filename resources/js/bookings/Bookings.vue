@@ -14,16 +14,16 @@
 
                 <div class="row mt-5" v-for="booking in bookings" :key=" 'booking' + booking.id">
                     <div class="col-md-4">
-                        <img src="https://lorempixel.com/1000/350/nature/?95431" alt="Photo de l'annonce" class="img-fluid">
+                        <img :srcset="booking.bookable.image" alt="Photo de l'annonce" class="img-fluid">
                         <div class="mt-3">
                            <!-- <router-link :to="{name: 'review', params: {id: booking.review_key}}">Je donne mon avis</router-link>-->
                         <!--{{booking.review_key}}-->
                         </div>
                     </div>
 
-                    <div class="col-8">
+                    <div class="col-md-8">
                         <h4>{{booking.bookable.title}}.</h4>
-                        <p>Réservation <strong>n°1159</strong> <br>
+                        <p>Réservation <strong>{{booking.id}}</strong> <br>
                             Du {{ booking.from | date }} au {{ booking.to | date }}
                             ({{booking.price}} €)
                         </p>

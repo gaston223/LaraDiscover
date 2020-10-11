@@ -4,11 +4,11 @@
     <div class="card card-personal mb-4 ">
         <!--Card image-->
         <div class="view overlay">
-            <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/21.jpg"
+            <img class="card-img-top" :srcset="this.image"
                  alt="Card image cap">
-            <a href="#!">
+            <router-link :to="{ name: 'bookable', params: { id : id} }">
                 <div class="mask rgba-white-slight"></div>
-            </a>
+            </router-link>
         </div>
         <!--Card image-->
 
@@ -21,8 +21,13 @@
             </router-link>
 
             <a>
-                <span class="badge badge-info py-2 px-2 mt-2">$ 150</span>
+                <span class="badge badge-info py-2 px-2 mt-2 mb-2">{{price}} € / jour</span>
             </a>
+
+            <star-rating :value="average_rating" class="list-unstyled rating mt-2"></star-rating>
+            <span class="text-muted">{{average_rating|numeral('0.0')}} ({{sum_review}}) </span>
+
+
 
             <!-- Text -->
             <p class="card-text mt-2"> {{ description }}</p>
@@ -34,8 +39,7 @@
                 <div class="col-lg-4 col-md-12 text-center">
                     <p class="dark-grey-text">
                         <i class="fas fa-gas-pump"></i>
-                         <span v-if="title.length > 18"> Essence</span>
-                         <span v-else> Diesel</span>
+                         <span> Diesel</span>
                     </p>
                 </div>
                 <!--Grid column-->
@@ -62,9 +66,9 @@
             <hr>
             <!--Grid column-->
             <div class="col-12 text-center ">
-                <button class="btn btn-info btn-sm font-weight-bold btn-rounded">
-                    <strong>Book a room</strong>
-                </button>
+                <router-link :to="{ name: 'bookable', params: { id : id} }" class="btn btn-info btn-sm">
+                    <strong>Réserver</strong>
+                </router-link>
             </div>
             <!--Grid column-->
 
@@ -78,8 +82,16 @@
 
 <script>
     export default {
-        props: {"title": String, "description" : String, "id" : Number},
+        props: {"title": String, "description" : String, "id" : Number, "image" : String, "price" : Number,  "average_rating":Number, "sum_review" : Number},
     }
 </script>
 <style scoped>
+        @media (min-width: 900px) {
+            .card-img-top {
+                width: 100%;
+                height: 15vw;
+                object-fit: cover;
+            }
+        }
+
 </style>

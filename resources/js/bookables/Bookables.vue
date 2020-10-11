@@ -2,15 +2,16 @@
 
     <div>
         <!-- Jumbotron -->
-        <div class="card card-image backgroundImage mb-5" style="background-image: url('https://images.unsplash.com/photo-1489008777659-ad1fc8e07097?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');" >
+        <div class="card card-image backgroundImage mb-5" style="background-image: url('http://www.coga6486.odns.fr/Chevereto/images/2020/10/10/theodor-vasile-d3jPsWVlYr4-unsplash-2.md.jpg');" >
             <div class="text-white text-center rgba-stylish-strong py-5 px-4">
                 <div class="py-5">
 
                     <!-- Content -->
 
-                    <h2 class="card-title h2 my-4 py-2">Profitez des meilleurs expériences !</h2>
-                    <p class="mb-4 pb-2 px-md-5 mx-md-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur obcaecati vero aliquid libero doloribus ad, unde tempora maiores, ullam, modi qui quidem minima debitis perferendis vitae cumque et quo impedit.</p>
-
+                    <h2 class="card-title h2 my-4 py-2">Trouvez le Combi de vos rêves !</h2>
+                    <p class="mb-4 pb-2 px-md-5 mx-md-5">
+                        Verifier la disponibilité des véhicules dans vos dates choisies et réserver la voiture de vos reves en toute sérénité !
+                    </p>
                 </div>
             </div>
         </div>
@@ -21,7 +22,7 @@
         </div>
 
         <div v-else>
-            <h2>Nos Expériences : </h2>
+            <h2>Nos Combis : </h2>
             <div class="row mb-4" v-for="row in rows" :key=" 'row' + row">
                 <div class="col-md-4 d-flex align-items-stretch" v-for="(bookable, column) in bookablesInRow(row)"
                      :key="'row'+ row + column">

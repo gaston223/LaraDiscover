@@ -10,7 +10,7 @@
                         Moyenne globale donnée par nos explorateurs :
 
                         <div class="col">
-                            {{avgRating  | numeral('0')}} /5
+                            {{avgRating  | numeral('0.0')}}
                             <small>(sur {{sumReview}} évaluations clients )</small>
                         </div>
 
@@ -34,7 +34,13 @@
             <div class="bg-light rounded mb-3 py-3 px-3 d-none d-md-block " v-for="(review, index) in reviews" :key="index">
                 <div class="row align-items-center">
                     <div class="col-md-6">
-                        <strong>Eric Choupo</strong> a dit :
+                        <div v-if="review.username">
+                            <strong>{{review.username}}</strong> a dit :
+                        </div>
+                       <div v-else>
+                           <strong>Gaoussou</strong> à dit :
+                       </div>
+
                     </div>
 
                     <div class="col-md-6 d-flex justify-content-end">

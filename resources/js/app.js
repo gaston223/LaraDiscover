@@ -8,6 +8,7 @@ import moment from "moment";
 import Index from "./Index";
 import StarRating from "./shared/components/StarRating";
 import FatalError from "./shared/components/FatalError"
+import AlreadyRated from "./shared/components/AlreadyRated"
 import Success from "./shared/components/Success"
 import ValidationErrors from "./shared/components/ValidationErrors"
 import storeDefinition from "./store";
@@ -35,6 +36,7 @@ Vue.use(vueNumeralFilterInstaller, { locale: 'fr'});
 
 Vue.component("star-rating", StarRating);
 Vue.component("fatal-error", FatalError);
+Vue.component("already-rated", AlreadyRated);
 Vue.component("success", Success);
 Vue.component("v-errors", ValidationErrors);
 

@@ -24,7 +24,8 @@ class ReviewController extends Controller
         $data = $request->validate([
             'id' => 'required|size:36|unique:reviews',
             'content' => 'required|min:2',
-            'rating' => 'required|in:1,2,3,4,5'
+            'rating' => 'required|in:1,2,3,4,5',
+            'username' => 'required'
         ]);
 
         $booking = Booking::findByReviewKey($data['id']);

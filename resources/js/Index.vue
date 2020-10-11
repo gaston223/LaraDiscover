@@ -7,7 +7,7 @@
         <!--Navbar -->
             <nav class="mb-1 navbar navbar-expand-lg navbar navbar-light grey lighten-5 fixed-top scrolling-navbar">
                 <div class="container">
-                    <router-link :to="{name: 'home'}" class="navbar-brand logo" href="#"><i style="color: #2bbbad" class="fas fa-car-alt"></i> CAR-DISCOVER</router-link>
+                    <router-link :to="{name: 'home'}" class="navbar-brand logo" href="#"><i style="color: #33b5e5" class="fas fa-car-alt"></i> COMBI-DISCOVER</router-link>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
                             aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -30,7 +30,7 @@
                                 <div class="dropdown-menu dropdown-menu-right dropdown-default"
                                      aria-labelledby="navbarDropdownMenuLink-334">
                                     <router-link :to="{name:'bookings',params: { id : user.id} }" class="dropdown-item">
-                                        Mon Compte
+                                        Mes Réservations
                                     </router-link>
                                 </div>
                             </li>

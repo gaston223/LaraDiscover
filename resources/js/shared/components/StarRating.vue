@@ -1,21 +1,23 @@
 <template>
     <div class="d-flex">
-       <i class="fas fa-star"
+       <i class="fas fa-star amber-text"
           v-for="star in fullStars"
           :key="'full'+ star "
           @click="$emit('input', star)"
        >
 
        </i>
-        <i class="fas fa-star-half-alt" v-if="halfStar"></i>
-        <i class="far fa-star"
+        <i class="fas fa-star-half-alt amber-text" v-if="halfStar"></i>
+        <i class="far fa-star amber-text"
            v-for="star in emptyStars"
            :key="'empty'+ star "
            @click="$emit('input', fullStars + star)"
         >
 
         </i>
+
     </div>
+
 </template>
 
 <script>

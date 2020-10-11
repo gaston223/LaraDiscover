@@ -4,7 +4,8 @@
             Vous avez évalué votre expérience avec succès, nous vous remercions de votre contribution !
         </success>
 
-        <fatal-error v-if="error"></fatal-error>
+        <!--<fatal-error v-if="error"></fatal-error>-->
+        <already-rated v-if="error"></already-rated>
         <div class="row" v-if="!success && !error">
             <div :class="[{'col-md-4':twoColumns},{'d-none': oneColumn}]">
                 <div class="card m-4">
@@ -61,6 +62,7 @@
 <script>
     import {is404, is422} from "../shared/utils/response";
     import validationErrors from "../shared/mixins/validationErrors";
+    import {mapState} from "vuex";
 
     export default {
         mixins : [validationErrors],
@@ -69,7 +71,8 @@
              review: {
                  id: null,
                  rating:5,
-                 content: null
+                 content: null,
+                 username: null
              },
              existingReview: null,
              loading: false,
@@ -91,6 +94,7 @@
                     try {
                         // 2. Fetch a booking by a review key
                         this.booking = (await axios.get(`/api/booking-by-review/${this.review.id}`)).data.data;
+
                     } catch (err) {
                         this.error = !is404(err);
                     }
@@ -98,8 +102,11 @@
                 } else{
                     this.error = true;
                 }
+
             }
+
             this.loading = false;
+
         },
         computed: {
             alreadyReviewed() {
@@ -124,6 +131,11 @@
                 this.errors = null;
                 this.sending = true;
                 this.success = false;
+
+                this.review.username = this.booking.user.username;
+                console.log(this.review.username);
+
+                console.log(this.review);
 
                 axios.post(`/api/reviews`, this.review)
                     .then(response =>{

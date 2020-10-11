@@ -13,6 +13,15 @@
                    <div v-else>Chargement ...</div>
 
                </div>
+
+                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" :srcset="bookable.image">
+                        </div>
+                    </div>
+                </div>
+
                 <div v-if="!loading">
                     <review-list :bookable-id="this.$route.params.id" :avg-rating="bookable.average_rating" :sum-review="bookable.sum_review"></review-list>
                 </div>
@@ -63,18 +72,18 @@
         },
         props: {
             avgRating: Number,
-            sumReview : Number
+            sumReview : Number,
         },
         data(){
             return {
-                bookable: null,
+                bookable: {},
                 loading : false,
-                price: null
+                price: null,
             }
         },
-        created() {
+         created() {
             this.loading = true;
-            axios
+           axios
                 .get(`/api/bookables/${this.$route.params.id}`)
                 .then(response => {
                     this.bookable = response.data.data;
@@ -125,5 +134,10 @@
 <style scoped>
     .warning{
         font-size: 0.7rem;
+    }
+    .carousel-item{
+        width: 100%;
+        /*height: 25vw;*/
+        object-fit: cover;
     }
 </style>
