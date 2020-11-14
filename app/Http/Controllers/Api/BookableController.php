@@ -15,9 +15,10 @@ class BookableController extends Controller
      */
     public function index()
     {
-        return BookableIndexResource::collection(
+        /*return BookableIndexResource::collection(
             Bookable::all()
-        );
+        );*/
+        throw new \Exception('Testing my application!');
     }
 
     /**

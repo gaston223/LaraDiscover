@@ -1,6 +1,6 @@
 <template>
     <!--Grid column-->
-    <div class="w-50 m-auto">
+    <div class="col-md-6 m-auto">
 
 
             <!-- Material form login -->
